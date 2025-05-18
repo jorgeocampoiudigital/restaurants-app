@@ -30,6 +30,7 @@ export class RestaurantService {
 
   constructor() {
     this.initializeData();
+    this.clearStorage();
    }
 
   private initializeData(): void {
@@ -43,11 +44,8 @@ export class RestaurantService {
 }
 
   getRestaurants(): Restaurant[] {
-  this.clearStorage();
   const stored = localStorage.getItem(this.STORAGE_KEY);
-  console.log('Datos en localStorage:', stored); // Debug
-  console.log('Datos iniciales:', this.initialRestaurants); // Debug
-  
+
   if (!stored) {
     console.warn('No hay datos en localStorage, cargando iniciales');
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.initialRestaurants));
