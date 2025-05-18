@@ -1,0 +1,38 @@
+<div class="container-fluid m-0 p-0 d-flex flex-column min-vh-100">
+  <div class="row">
+    <div class="col">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Restaurantes</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" [routerLink]="['/inicio']" routerLinkActive="/inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/buscar']" routerLinkActive="/buscar">Buscar Restaurantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/agregar']" routerLinkActive="/agregar">Nuevo Restaurante</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row flex-grow-1 m-1 p-1">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <footer class="bg-dark text-white mt-2 py-2">
+    <div class="container text-center">
+        <p>© 2025 Institución Universitaria Digital de Antioquia</p>
+    </div>
+  </footer>
+
+</div>
