@@ -31,7 +31,8 @@ export class AgregarComponent {
   addRestaurant(): void {
     if (this.isValid()) {
       this.restaurantService.addRestaurant(this.newRestaurant);
-      alert(`Restaurante "${this.newRestaurant.name}" creado exitosamente!`);
+      this.restaurantService.alert("Creación Exitosa",`Restaurante "${this.newRestaurant.name}" creado exitosamente!`,"success");
+      //alert(`Restaurante "${this.newRestaurant.name}" creado exitosamente!`);
       this.router.navigate(['/']);
     }
   }

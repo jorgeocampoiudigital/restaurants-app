@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../models/restaurant.model';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -73,4 +74,13 @@ export class RestaurantService {
       restaurant.address.toLowerCase().includes(lowerTerm)
     );
   }
+
+  alert(title: any, message: any, icon: any){
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: icon
+    });
+  }
+
 }
