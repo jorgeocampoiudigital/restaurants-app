@@ -1,32 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from '../../models/restaurant.model';
 import { RestaurantService } from '../../services/restaurant.service';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Restaurant } from '../../models/restaurant.model';
 
 @Component({
   selector: 'app-inicio',
-  imports: [
-    CommonModule
-  ],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css'
+  styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent implements OnInit{
-
-  restaurants: Restaurant[] = [];
+export class InicioComponent implements OnInit {
+  restaurants$!: Observable<Restaurant[]>;
   isLoading = true;
 
-  constructor(
-    private restaurantService: RestaurantService
-  ) { }
+  constructor(private restaurantService: RestaurantService) {}
 
   ngOnInit(): void {
-    this.loadRestaurants();
+    this.restaurants$ = this.restaurantService.getRestaurants();
+    this.restaurants$.subscribe({
+      next: () => this.isLoading = false,
+      error: () => this.isLoading = false
+    });
   }
-
-  loadRestaurants(): void {
-    this.restaurants = this.restaurantService.getRestaurants();
-    this.isLoading = false;
-  }
-
 }

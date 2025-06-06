@@ -1,34 +1,24 @@
 import { Component } from '@angular/core';
-import { Restaurant } from '../../models/restaurant.model';
 import { RestaurantService } from '../../services/restaurant.service';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { Restaurant } from '../../models/restaurant.model';
 
 @Component({
   selector: 'app-buscar',
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './buscar.component.html',
-  styleUrl: './buscar.component.css'
+  styleUrls: ['./buscar.component.css']
 })
 export class BuscarComponent {
-
   searchTerm = '';
-  results: Restaurant[] = [];
-  allRestaurants: Restaurant[] = [];
+  results$: Observable<Restaurant[]> | null = null;
 
-  constructor(private restaurantService: RestaurantService) {
-    this.allRestaurants = this.restaurantService.getRestaurants();
-    this.results = [...this.allRestaurants];
-  }
+  constructor(private restaurantService: RestaurantService) {}
 
   search(): void {
-    this.results = this.searchTerm 
-      ? this.restaurantService.searchRestaurants(this.searchTerm)
-      : [...this.allRestaurants];
+    this.results$ = this.restaurantService.searchRestaurants(this.searchTerm);
   }
-
 }

@@ -6,9 +6,9 @@
     <button class="btn btn-primary" (click)="search()">Buscar</button>
   </div>
 
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let restaurant of results">
-      <div class="card h-100">
+  <div class="row" *ngIf="results$ | async as restaurants">
+    <div class="col-md-4 mb-4" *ngFor="let restaurant of restaurants" >
+      <div class="card h-100" >
         <img [src]="restaurant.image" class="card-img-top" [alt]="restaurant.name" style="height: 200px; object-fit: cover;">
         <div class="card-body">
           <h5 class="card-title">{{ restaurant.name }}</h5>
@@ -19,3 +19,6 @@
     </div>
   </div>
 </div>
+       
+          
+

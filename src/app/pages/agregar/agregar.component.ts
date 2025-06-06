@@ -7,15 +7,12 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar',
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './agregar.component.html',
-  styleUrl: './agregar.component.css'
+  styleUrls: ['./agregar.component.css']
 })
 export class AgregarComponent {
-
   newRestaurant: Restaurant = {
     name: '',
     description: '',
@@ -26,14 +23,16 @@ export class AgregarComponent {
   constructor(
     private restaurantService: RestaurantService,
     private router: Router
-  ) { }
+  ) {}
 
-  addRestaurant(): void {
+  async addRestaurant(): Promise<void> {
     if (this.isValid()) {
-      this.restaurantService.addRestaurant(this.newRestaurant);
-      this.restaurantService.alert("Creación Exitosa",`Restaurante "${this.newRestaurant.name}" creado exitosamente!`,"success");
-      //alert(`Restaurante "${this.newRestaurant.name}" creado exitosamente!`);
-      this.router.navigate(['/']);
+      try {
+        await this.restaurantService.addRestaurant(this.newRestaurant);
+        this.router.navigate(['/']);
+      } catch (error) {
+        console.error('Error al agregar restaurante:', error);
+      }
     }
   }
 
@@ -43,5 +42,4 @@ export class AgregarComponent {
            !!this.newRestaurant.address && 
            !!this.newRestaurant.image;
   }
-
 }
