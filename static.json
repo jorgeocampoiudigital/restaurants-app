@@ -1,0 +1,6 @@
+{
+  "root": "dist/tu-app",
+  "routes": {
+    "/**": "index.html"
+  }
+}

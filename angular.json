@@ -45,6 +45,7 @@
                   "maximumError": "8kB"
                 }
               ],
+              "outputPath": "dist/restaurants-app",
               "outputHashing": "all"
             },
             "development": {
